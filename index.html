@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>fg</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+    </head>
+    <body>
+        <button id="bolo" onclick="shot()">see</button>
+        <button onclick="next()">next</button>
+        <div id="cam"></div>
+        <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCtlqaLBCqU_wv5RKuJsTlqCn4cEWwmPv8",
+            authDomain: "timepass-c61c7.firebaseapp.com",
+            databaseURL: "https://timepass-c61c7.firebaseio.com",
+            projectId: "timepass-c61c7",
+            storageBucket: "timepass-c61c7.appspot.com",
+            messagingSenderId: "988439044598",
+            appId: "1:988439044598:web:23b902a96360858504a7d7"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        Webcam.set({
+            width:350,
+            height:290,
+            image_format:'png',
+            png_quality:90
+        });
+        cam = document.getElementById("cam");
+        Webcam.attach(cam);
+
+        function shot(){
+            Webcam.snap(function(img){
+                firebase.database().ref("image").update({
+                    images : img
+                });
+            });
+        }
+        function next(){
+            window.location = "index2.html";
+        }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>SEE here</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+    </head>
+    <body>
+        <div id="output"></div>
+        <button onclick="bac()">back</button>
+        <script>
+            var firebaseConfig = {
+            apiKey: "AIzaSyCtlqaLBCqU_wv5RKuJsTlqCn4cEWwmPv8",
+            authDomain: "timepass-c61c7.firebaseapp.com",
+            databaseURL: "https://timepass-c61c7.firebaseio.com",
+            projectId: "timepass-c61c7",
+            storageBucket: "timepass-c61c7.appspot.com",
+            messagingSenderId: "988439044598",
+            appId: "1:988439044598:web:23b902a96360858504a7d7"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        function bac(){
+            window.location = "index.html";
+        }
+        function getImage(){
+            firebase.database().ref("image").on('value',function(snapshot){
+            document.getElementById("output").innerHTML = "";
+            snapshot.forEach(function(childSnapshot){
+                key = childSnapshot.A.B;
+                console.log(childSnapshot);
+                document.getElementById("output").innerHTML = "<img src="+key+">";
+            });
+        });
+        }
+        getImage();
+        </script>
+    </body>
+</html>
